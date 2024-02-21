@@ -1,15 +1,19 @@
 from django.shortcuts import render
+from example.forms import LocationForm
+from example.models import Country
 
-# Create your views here.
-
-from .forms import LocationForm
-from .models import City
 
 def index(request):
     form = LocationForm()
-    return render(request, 'index.html', {'form': form})
+    context = {
+        'form': form,
+    }
+    return render(request, 'index.html', context)
 
-def load_cities(request):
-    country_id = request.GET.get('country')
-    cities = City.objects.filter(country_id=country_id).order_by('name')
-    return render(request, 'city_options.html', {'cities': cities})
+
+def display_countries(request):
+    countries = Country.objects.all()
+    context = {
+        'countries': countries,
+    }
+    return render(request, 'display_countries.html', context)

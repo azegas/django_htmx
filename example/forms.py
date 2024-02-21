@@ -1,7 +1,9 @@
 from django import forms
+from example.models import City, Country
+from django.contrib.auth.models import User
 
-from .models import City, Country
 
 class LocationForm(forms.Form):
-    country = forms.ModelChoiceField(queryset=Country.objects.all())
-    city = forms.ModelChoiceField(queryset=City.objects.none())
+    countries = forms.ModelChoiceField(queryset=Country.objects.all())
+    cities = forms.ModelChoiceField(queryset=City.objects.all())
+    users = forms.ModelChoiceField(queryset=User.objects.all())
