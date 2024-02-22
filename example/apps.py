@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DeleteConfig(AppConfig):
+class ExampleConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "delete"
+    name = "example"

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from delete.forms import LocationForm
-from delete.models import Country
+from example.forms import LocationForm
+from example.models import Country
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
