@@ -2,7 +2,8 @@
 
 {% block body %}
 
-<h1>Countries</h1>
+<!-- countries.count does not update, since it is not being re-rendered, only country_list is being re-rendered!!! -->
+<h1>Countries {{countries.count}}</h1>
 
 {% include "country_list.html" %}
 

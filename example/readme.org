@@ -1,0 +1,36 @@
+Example partly from here
+https://www.mattlayman.com/blog/2021/how-to-htmx-django/
+
+* Deletion
+
+- ignore the dropdown selections and the form, they have nothing to do with
+  this
+- /countries lists all the countries in the db
+- country list has a button, that button CALLS =lol= LINK and GIVES
+  =country.id= of a particular object from the for loop in the template!!! Each
+  object in the forloop has information within, the model info.
+- the lol represents an url, where delete_country function is called WITH and
+  id. where did it get this id? From the for loop in the previous step, it was
+  given!
+- okay so we clickd the button, lets get to the views, see what happens there
+- since hx-delete was used int he template, a delete method was used
+- now in views, when delete method WITH delete_country function is called, what
+  happens is, we find the specific country object by the id and delete it. Then
+  we get all the countries again, provide it in the context WHILE rendering
+  country_list page, which is a smal part(included part) in the
+  display_countries html.
+- so ONLY the small part(included part), the "countries" id div part that was
+  specified in hx-target will be changed.
+- No need for the full page reload!!!
+
+I have left <h1>Countries {{countries.count}}</h1> in the
+=display_countries.html= page just to demonstrate, that htmx does not re-render
+the whole page, but it re-renders ONLY THE SMALL block of =country_list.html=.
+
+Its nice to see all the delete requests going upon click when we click the
+delete button.
+
+This is amazing yo... and htmx probabyly has what.. support for the basics,
+get/put/update/delete/. What else is needed? With it you can do EVERYTHING!
+
+
