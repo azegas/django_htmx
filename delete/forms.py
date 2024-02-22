@@ -1,5 +1,5 @@
 from django import forms
-from example.models import City, Country
+from delete.models import City, Country
 from django.contrib.auth.models import User
 
 
