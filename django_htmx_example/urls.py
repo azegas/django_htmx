@@ -21,5 +21,6 @@ from example import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
-    path("countries/", views.display_countries, name="display_countries")
+    path("countries/", views.display_countries, name="display_countries"),
+    path("countries/<int:id>/delete/", views.delete_country, name="delete_country"),
 ]

@@ -1,5 +1,12 @@
-<div id="countries">
-  {% for country in countries %}
-    <div>{{ forloop.counter }} {{ country.name }}</div>
+<div id="countries"
+     hx-target="#countries"
+     hx-swap="outerHTML">
+    {% for country in countries %}
+    <div>{{ forloop.counter }} {{ country.name }} {{country.id}}
+	<button class="block mr-2 hover:text-gray-600"
+	   hx-delete="{% url 'delete_country' country.id %}">
+	    Delete?
+	</button>
+    </div>
     {% endfor %}
 </div>
