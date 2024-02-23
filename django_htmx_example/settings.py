@@ -69,6 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "django_htmx_example.wsgi.application"
+USE_THOUSAND_SEPARATOR = True
 
 
 # Database
