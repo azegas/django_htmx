@@ -4,5 +4,10 @@ from django.contrib import admin
 
 from .models import City, Country
 
-admin.site.register(City)
+
+class TestAdmin(admin.ModelAdmin):
+    change_form_template = "admin/test_change_form.html"
+
+
+admin.site.register(City, TestAdmin)
 admin.site.register(Country)
