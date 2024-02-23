@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from example.forms import LocationForm
-from example.models import Country
+from example.models import Country, City
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
@@ -19,6 +19,14 @@ def display_countries(request):
         'countries': countries,
     }
     return render(request, 'display_countries.html', context)
+
+
+def display_cities(request):
+    cities = City.objects.all()
+    context = {
+        'cities': cities,
+    }
+    return render(request, 'display_cities.html', context)
 
 
 @csrf_exempt # on delete I get Forbidden CSRF token missing.): /countries/19/delete/ 

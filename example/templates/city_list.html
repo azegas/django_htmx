@@ -1,0 +1,9 @@
+<div id="cities"
+     style="background-color: yellow; padding: 20px;"
+     hx-target="#cities"
+     hx-swap="outerHTML">
+    {% for city in cities %}
+    <div>{{ forloop.counter }} {{ city.name }} {{city.id}}
+    </div>
+    {% endfor %}
+</div>
