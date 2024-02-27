@@ -5,6 +5,9 @@
 // 3. when the user leaves the id_inhabitants field - it coverts back to the text with commas and everything, applied localestring thing
 // 4. before submit, conversion to number field happens again, so the data is stored to db properly as numbers, with decimal numbers and all
 
+// converts only one field
+// nothing happens on submit of the form
+
 
 function add_commas(field) {
     field.value = parseFloat(field.value).toLocaleString();;
