@@ -32,4 +32,4 @@ $(document).ready(function() {
     inhabitants_field.addEventListener("blur", function() {
         initial_changes(inhabitants_field);
       });
-});s
+});
