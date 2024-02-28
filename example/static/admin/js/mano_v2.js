@@ -34,7 +34,6 @@ $(document).ready(function() {
 
         change_form.addEventListener('submit', function(e) {
             convert_to_number_field(input_field)
-            console.log("hello")
         });
     }
 });

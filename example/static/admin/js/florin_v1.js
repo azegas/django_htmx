@@ -1,16 +1,9 @@
-// 1. finding the id_inhabitants field
-// 2. converting it's type to text
-// 3. creating an array from the current value of the field
-// 4. take decimals
-
-
+// make text field behave like a number field
+// remove comma and extra dots from num to allow conversion to float
 function number_input_behaviour(input, max_decimal_length) {
-    // convert the current number into anarray
+    // [ "3", "4,5", "67,6", "7", "", "", "77", "", "", "", "666"].join('.')
     let num_array = input.value.split('.');
     let decimals = '';
-
-
-    // get the last two decimals
     if (num_array.length > 1) {
         // get the last digits split by "."
         decimals = num_array.splice(num_array.length - 1, 1);
@@ -23,7 +16,6 @@ function number_input_behaviour(input, max_decimal_length) {
             }
         }
     }
-    
     // restore the integer part after extra dots have been removed
     // remove comma & non numeric element
     num_array = num_array.join('').split(',').join('').split('');
@@ -41,17 +33,24 @@ function number_input_behaviour(input, max_decimal_length) {
     }
     return integer;
 }
-
-$( document ).ready(function() {
+ 
+function convert_to_text_field(field) {
     const max_decimal_length = 2;
-    const change_form = document.querySelector('#content-main > form');
-    const inhabitants = document.getElementById('id_inhabitants');
-    inhabitants.type = 'text';
-    inhabitants.addEventListener('keyup', function(event) {
+    field.type = 'text';
+    field.value = parseFloat(field.value).toLocaleString();
+    field.addEventListener('keyup', function(event) {
         if (!['Backspace', 'Delete'].includes(event.key )) {
-            this.value = number_input_behaviour(inhabitants, max_decimal_length);
+            this.value = number_input_behaviour(field, max_decimal_length);
         }
     });
+}
+
+ 
+$( document ).ready(function() {
+
+    const change_form = document.querySelector('#content-main > form');
+    const inhabitants = document.getElementById('id_inhabitants');
+    convert_to_text_field(inhabitants,)
     change_form.addEventListener('submit', function(event) {
         inhabitants.value = inhabitants.value.split(',').join('');
         document.getElementById('id_inhabitants').type = 'number';
