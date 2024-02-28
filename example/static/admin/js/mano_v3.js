@@ -8,7 +8,9 @@
 
 function convert_to_text_field(field) {
     field.type = 'text';
-    field.value = parseFloat(field.value).toLocaleString();;
+    if (field.value != '') {
+        field.value = parseFloat(field.value).toLocaleString("en-US");
+    }
 }
 
 function convert_to_number_field(field) {
