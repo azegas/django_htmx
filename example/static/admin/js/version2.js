@@ -1,38 +1,40 @@
 // What I actually need is:
-// 0. on page load, take id_inhabitants field
-// 1. render the id_inhabitants as Text field(it is currently rendered as number), with commas and everything, applied localestring thing
-// 2. when the user clicks on the field - it converts the field to number field, so the user can type and everything
-// 3. when the user leaves the id_inhabitants field - it coverts back to the text with commas and everything, applied localestring thing
-// 4. before submit, conversion to number field happens again, so the data is stored to db properly as numbers, with decimal numbers and all
+// 0. on page load, take all the input fields from the form with a type number
+// 1. render the fields as TEXT fields(it is currently rendered as number), with commas and everything, applied built in js toLocaleString method
+// 2. when the user clicks on the TEXT field - it immeaditelly converts the field to NUMBER field, so the user can properly type numbers
+// 3. when the user leaves the input field - automatic conversion back to the TEXT field happens, commas and everything applied as in step 1
+// 4. before submit action in the form, conversion to number field happens again, so the data is stored to db properly as numbers, how django likes it
 
-// converts only one field
-// nothing happens on submit of the form
-
-
-function add_commas(field) {
-    field.value = parseFloat(field.value).toLocaleString();;
-}
 
 function convert_to_text_field(field) {
     field.type = 'text';
+    field.value = parseFloat(field.value).toLocaleString();;
 }
 
-function initial_changes(field) {
-    convert_to_text_field(field)
-    add_commas(field)
+function convert_to_number_field(field) {
+    formated_value = field.value.split(',').join('')
+    field.value = formated_value
+    field.type = 'number';
 }
 
 $(document).ready(function() {
-    const inhabitants_field = document.getElementById('id_inhabitants');
-    initial_changes(inhabitants_field);
+    change_form = document.querySelector('#content-main > form');
+    const input_fields = change_form.querySelectorAll('input[type="number"]');
 
-    inhabitants_field.addEventListener('click', function(e) {
-        formated_value = inhabitants_field.value.split(',').join('')
-        inhabitants_field.value = formated_value
-        inhabitants_field.type = 'number';
-    })
+    for (const input_field of input_fields) {
+        convert_to_text_field(input_field);
 
-    inhabitants_field.addEventListener("blur", function() {
-        initial_changes(inhabitants_field);
-      });
+        input_field.addEventListener('click', function(e) {
+            convert_to_number_field(input_field)
+        })
+
+        input_field.addEventListener("blur", function() {
+            convert_to_text_field(input_field);
+        });
+
+        change_form.addEventListener('submit', function(e) {
+            convert_to_number_field(input_field)
+            console.log("hello")
+        });
+    }
 });
